@@ -34,13 +34,16 @@
     <p class="mt-4">{{ producto.descripcion }}</p>
     {% if user.is_authenticated and not user.is_staff %}
 
-    <a href="#" class="btn btn-success">
+    <a
+      href="{% url 'ecommerce:agregar_carrito' producto.id %}"
+      class="btn btn-success"
+    >
       <i class="bi bi-cart-plus"></i>
-
       Agregar al carrito
     </a>
 
-    {% endif %} {% if user.is_staff %}
+    {% endif %} 
+    {% if user.is_staff %}
 
     <div class="mb-4">
       <a

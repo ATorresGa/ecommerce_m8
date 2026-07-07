@@ -14,6 +14,26 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 
 ---
 
+## [0.5.0] - 2026-07-07
+
+### Added
+
+* Implementación del carrito utilizando sesiones de Django.
+* Vista para visualizar el carrito.
+* Funcionalidad para agregar productos al carrito.
+* Funcionalidad para aumentar y disminuir cantidades.
+* Eliminación individual de productos.
+* Vaciado completo del carrito.
+* Validación de stock disponible antes de agregar productos.
+* Mensajes de éxito y advertencia utilizando el framework de mensajes de Django.
+
+### Fixed
+
+* Navegación del carrito manteniendo al usuario en la vista de origen.
+* Interfaz del carrito con Bootstrap.
+
+---
+
 ## [0.4.0] - 2026-07-08
 
 ### Added
