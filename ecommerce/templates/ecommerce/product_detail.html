@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %} {{ producto.nombre }} {% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-5">
+    {% if producto.imagen %}
+
+    <img
+      src="{{ producto.imagen.url }}"
+      class="img-fluid rounded shadow-sm"
+      alt="{{ producto.nombre }}"
+    />
+
+    {% else %}
+
+    <div
+      class="bg-light rounded shadow-sm d-flex justify-content-center align-items-center"
+      style="height: 350px"
+    >
+      <i class="bi bi-image fs-1 text-secondary"></i>
+    </div>
+
+    {% endif %}
+  </div>
+
+  <div class="col-lg-7">
+    <h1>{{ producto.nombre }}</h1>
+
+    <hr />
+
+    <h2 class="text-primary">${{ producto.precio }}</h2>
+
+    <p class="mt-4">{{ producto.descripcion }}</p>
+
+    <a href="{% url 'ecommerce:product_list' %}" class="btn btn-secondary">
+      Volver al catálogo
+    </a>
+  </div>
+</div>
+
+{% endblock %}

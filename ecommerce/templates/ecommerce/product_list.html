@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% block title %} Catálogo | PortafolioCommerce {%endblock %} 
+{% block content %}
+
+<h1 class="mb-4">Catálogo de Productos</h1>
+
+<div class="row g-4">
+  {% for producto in productos %}
+
+  <div class="col-md-6 col-lg-4">
+    {% include "partials/product_card.html" %}
+  </div>
+
+  {% empty %}
+
+  <div class="col-12">
+    <div class="alert alert-info">No hay productos disponibles.</div>
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}
