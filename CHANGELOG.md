@@ -18,14 +18,17 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 
 ### Added
 
-* Implementación del CRUD completo de productos mediante vistas genéricas de Django.
-* Creación de formularios con `ModelForm` para la gestión de productos.
-* Protección de las vistas de administración mediante autenticación y permisos de administrador.
-* Implementación de las vistas para crear, editar y eliminar productos.
-* Creación de las plantillas para formularios y confirmación de eliminación.
-* Integración del catálogo con el flujo de administración de productos.
-* Incorporación de validaciones automáticas mediante formularios de Django.
-* Mejora de la navegación para administradores desde el catálogo y el detalle de productos.
+* Implementación completa del CRUD de productos mediante vistas genéricas de Django.
+* Formularios reutilizables para crear y editar productos.
+* Confirmación de eliminación de productos.
+* Protección del CRUD mediante autenticación y permisos de administrador.
+* Integración del catálogo con la gestión de productos.
+* Mejoras visuales utilizando Bootstrap y Bootstrap Icons.
+
+### Fixed
+
+* Corrección de la configuración del formulario de autenticación (`LoginForm`).
+* Mejora en la asignación de clases CSS para los campos del formulario, diferenciando correctamente los `checkbox` del resto de los controles.
 
 ---
 

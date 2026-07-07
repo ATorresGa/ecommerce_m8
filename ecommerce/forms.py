@@ -36,3 +36,23 @@ class ProductoForm(forms.ModelForm):
                 campo.widget.attrs["class"] = "form-control"
 
         self.fields["activo"].initial = True
+
+class LoginForm(AuthenticationForm):
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese su usuario",
+            }
+        )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese su contraseña",
+            }
+        )
+    )
