@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block title %} {{ producto.nombre }} {% endblock %}
+{% extends "base.html" %} 
+{% block title %} {{ producto.nombre }} {% endblock %}
 {% block content %}
 
 <div class="row">
@@ -31,7 +32,35 @@
     <h2 class="text-primary">${{ producto.precio }}</h2>
 
     <p class="mt-4">{{ producto.descripcion }}</p>
+    {% if user.is_authenticated and not user.is_staff %}
 
+    <a href="#" class="btn btn-success">
+      <i class="bi bi-cart-plus"></i>
+
+      Agregar al carrito
+    </a>
+
+    {% endif %} {% if user.is_staff %}
+
+    <div class="mb-4">
+      <a
+        href="{% url 'ecommerce:product_update' producto.pk %}"
+        class="btn btn-warning"
+      >
+        <i class="bi bi-pencil-square"></i>
+        Editar
+      </a>
+
+      <a
+        href="{% url 'ecommerce:product_delete' producto.pk %}"
+        class="btn btn-danger"
+      >
+        <i class="bi bi-trash"></i>
+        Eliminar
+      </a>
+    </div>
+
+    {% endif %}
     <a href="{% url 'ecommerce:product_list' %}" class="btn btn-secondary">
       Volver al catálogo
     </a>

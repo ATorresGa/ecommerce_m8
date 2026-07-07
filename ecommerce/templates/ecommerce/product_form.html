@@ -1,0 +1,49 @@
+{% extends "base.html" %} 
+{% block title %} 
+    {% if object %} 
+        Editar producto 
+    {%else %} 
+        Nuevo producto 
+    {% endif %}
+    | PortafolioCommerce 
+{% endblock %} 
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <h3 class="mb-0">
+          {% if object %}
+          <i class="bi bi-pencil-square"></i>
+          Editar producto {% else %}
+          <i class="bi bi-plus-circle"></i>
+          Nuevo producto {% endif %}
+        </h3>
+      </div>
+
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %} {{ form.as_p }}
+
+          <div class="d-flex justify-content-between">
+            <a
+              href="{% url 'ecommerce:product_list' %}"
+              class="btn btn-secondary"
+            >
+              <i class="bi bi-arrow-left"></i>
+              Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-check-circle"></i>
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

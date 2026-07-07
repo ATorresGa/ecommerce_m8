@@ -23,8 +23,7 @@ class Producto(models.Model):
 class Pedido(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
     fecha = models.DateTimeField("Fecha de pedido", auto_now_add=True)
-    total = models.DecimalField("Total", max_digits=10, decimal_places=2)
-
+    total = models.PositiveIntegerField("Total")
     class Meta:
         verbose_name = "Pedido"
         verbose_name_plural = "Pedidos"
