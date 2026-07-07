@@ -14,6 +14,21 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 
 ---
 
+## [0.3.0] - 2026-07-07
+
+### Added
+
+* Configuración del sistema de autenticación de Django.
+* Personalización de la plantilla de inicio de sesión.
+* Implementación de un formulario de autenticación con estilos Bootstrap.
+* Configuración de redirecciones para inicio y cierre de sesión.
+* Implementación de una barra de navegación dinámica según el estado del usuario.
+* Visualización del nombre del usuario autenticado en la barra de navegación.
+* Preparación de la navegación para clientes y administradores.
+* Implementación del cierre de sesión mediante petición POST siguiendo las buenas prácticas de Django.
+
+---
+
 ## [0.2.0] - 2026-07-07
 
 ### Added
