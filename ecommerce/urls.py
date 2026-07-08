@@ -7,6 +7,7 @@ from .views import (
     ProductCreateView,
     ProductUpdateView,
     ProductDeleteView,
+    PedidoExitosoView,
     agregar_al_carrito,
     ver_carrito,
     eliminar_del_carrito,
@@ -80,4 +81,9 @@ urlpatterns = [
         confirmar_compra,
         name="confirmar_compra",
     ),
+    path(
+    "pedido/<int:pk>/exitoso/",
+    PedidoExitosoView.as_view(),
+    name="pedido_exitoso",
+),
 ]

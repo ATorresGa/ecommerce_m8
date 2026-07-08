@@ -16,6 +16,7 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 * Funcinalidad de compra
 * Funcionalidad de transaccion para la compra
 * Capturas de pantalla de distintas funcionalidades
+* Pagina de compra con exito
 
 ### Fixed
 

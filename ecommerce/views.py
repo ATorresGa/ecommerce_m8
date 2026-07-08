@@ -5,6 +5,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
+    DetailView,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -88,6 +89,15 @@ class ProductDeleteView(
     template_name = "ecommerce/product_confirm_delete.html"
 
     success_url = reverse_lazy("ecommerce:product_list")
+
+
+class PedidoExitosoView(LoginRequiredMixin, DetailView):
+    template_name = "ecommerce/pedido_exitoso.html"
+    model = Pedido
+    context_object_name = "pedido"
+
+    def get_queryset(self):
+        return Pedido.objects.filter(usuario=self.request.user)
 
 
 def agregar_al_carrito(request, producto_id):
@@ -219,4 +229,7 @@ def confirmar_compra(request):
 
     messages.success(request, "¡Compra realizada correctamente!")
 
-    return redirect("ecommerce:carrito")
+    return redirect(
+        "ecommerce:pedido_exitoso",
+        pk=pedido.pk,
+    )
