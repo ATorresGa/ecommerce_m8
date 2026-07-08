@@ -11,9 +11,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 from ecommerce.forms import ProductoForm
-from .models import Producto
+from .models import Producto, Pedido, ItemPedido
 from .carrito import Carrito
 
 
@@ -101,14 +103,10 @@ def agregar_al_carrito(request, producto_id):
     agregado = carrito.agregar(producto)
 
     if agregado:
-        messages.success(
-            request,
-            f'"{producto.nombre}" fue agregado al carrito.'
-        )
+        messages.success(request, f'"{producto.nombre}" fue agregado al carrito.')
     else:
         messages.warning(
-            request,
-            f'No hay más stock disponible para "{producto.nombre}".'
+            request, f'No hay más stock disponible para "{producto.nombre}".'
         )
 
     return redirect("ecommerce:product_list")
@@ -119,6 +117,7 @@ def ver_carrito(request):
         request,
         "ecommerce/carrito.html",
     )
+
 
 def eliminar_del_carrito(request, producto_id):
 
@@ -133,6 +132,7 @@ def eliminar_del_carrito(request, producto_id):
 
     return redirect("ecommerce:carrito")
 
+
 def restar_del_carrito(request, producto_id):
 
     carrito = Carrito(request)
@@ -146,6 +146,7 @@ def restar_del_carrito(request, producto_id):
 
     return redirect("ecommerce:carrito")
 
+
 def limpiar_carrito(request):
 
     carrito = Carrito(request)
@@ -153,6 +154,7 @@ def limpiar_carrito(request):
     carrito.limpiar()
 
     return redirect("ecommerce:carrito")
+
 
 def agregar_desde_carrito(request, producto_id):
 
@@ -165,4 +167,56 @@ def agregar_desde_carrito(request, producto_id):
     )
 
     carrito.agregar(producto)
+    return redirect("ecommerce:carrito")
+
+
+@login_required
+def confirmar_compra(request):
+
+    carrito = Carrito(request)
+
+    if not carrito.carrito:
+
+        messages.warning(request, "El carrito está vacío.")
+
+        return redirect("ecommerce:carrito")
+
+    with transaction.atomic():
+
+        pedido = Pedido.objects.create(
+            usuario=request.user,
+            total=0,
+        )
+        total = 0
+
+        for item in carrito.carrito.values():
+
+            producto = Producto.objects.get(pk=item["id"])
+
+            if producto.stock < item["cantidad"]:
+
+                messages.error(
+                    request, f"No hay stock suficiente para {producto.nombre}."
+                )
+
+                return redirect("ecommerce:carrito")
+
+            ItemPedido.objects.create(
+                pedido=pedido,
+                producto=producto,
+                cantidad=item["cantidad"],
+                precio=producto.precio,
+            )
+
+            producto.stock -= item["cantidad"]
+
+            producto.save()
+
+            total += producto.precio * item["cantidad"]
+        pedido.total = total
+        pedido.save()
+    carrito.vaciar()
+
+    messages.success(request, "¡Compra realizada correctamente!")
+
     return redirect("ecommerce:carrito")

@@ -8,9 +8,18 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-07-07
+
 ### Added
 
-* Pendiente de desarrollo.
+* Logica CRUD en carrito para agregar quitar mediante sessions
+* Funcinalidad de compra
+* Funcionalidad de transaccion para la compra
+* Capturas de pantalla de distintas funcionalidades
+
+### Fixed
+
+* Se removio el archivo sensible
 
 ---
 
@@ -34,7 +43,7 @@ El formato está basado en Keep a Changelog y este proyecto utiliza Versionado S
 
 ---
 
-## [0.4.0] - 2026-07-08
+## [0.4.0] - 2026-07-07
 
 ### Added
 

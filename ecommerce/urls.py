@@ -13,6 +13,7 @@ from .views import (
     limpiar_carrito,
     restar_del_carrito,
     agregar_desde_carrito,
+    confirmar_compra,
 )
 
 app_name = "ecommerce"
@@ -70,8 +71,13 @@ urlpatterns = [
         name="limpiar_carrito",
     ),
     path(
-        "carrito/agregar_desde_carrito/<int:producto_id>/",
+        "carrito/agregar-desde-carrito/<int:producto_id>/",
         agregar_desde_carrito,
         name="agregar_desde_carrito",
+    ),
+    path(
+        "confirmar-compra/",
+        confirmar_compra,
+        name="confirmar_compra",
     ),
 ]

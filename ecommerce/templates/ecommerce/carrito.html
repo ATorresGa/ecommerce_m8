@@ -57,7 +57,9 @@
     {% endfor %}
   </tbody>
 </table>
-
+<a href="{% url 'ecommerce:confirmar_compra' %}" class="btn btn-success">
+  Confirmar compra
+</a>
 {% else %}
 
 <div class="alert alert-info">Tu carrito está vacío.</div>

@@ -25,9 +25,10 @@ class Carrito:
         if producto_id not in self.carrito:
 
             self.carrito[producto_id] = {
-                "cantidad": 1,
-                "precio": producto.precio,
+                "id": producto.id,
                 "nombre": producto.nombre,
+                "precio": producto.precio,
+                "cantidad": 1,
             }
 
             self.guardar()
@@ -73,5 +74,13 @@ class Carrito:
     def limpiar(self):
 
         self.session["carrito"] = {}
+
+        self.session.modified = True
+    
+    def vaciar(self):
+
+        self.session["carrito"] = {}
+
+        self.carrito = self.session["carrito"]
 
         self.session.modified = True
